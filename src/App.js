@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import './background.mp3';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         >
           Learn React
         </a>
+        <audio src = "./background.mp3" autoPlay loop/>
       </header>
     </div>
   );
