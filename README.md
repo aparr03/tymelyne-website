@@ -1,7 +1,7 @@
 # tymeline-website
 **Senior Design II Project**
 
-**TO SIMPLY VIEW THE PROJECT, GO TO https://tymeline.vercel.app/**
+**TO SIMPLY VIEW THE PROJECT, GO TO https://tymelyne.vercel.app/**
 
 ## HOW TO SET UP AND EDIT CODE
 
