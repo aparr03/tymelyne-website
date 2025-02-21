@@ -21,7 +21,7 @@ Senior Design II Project
    - [Download Github Desktop](https://desktop.github.com/download/)  
    - Clone the repo `tymeline-website` and save it to your machine  
    - Pull the latest edition of `main`  
-   - Open the file directory in VS Code  
+   - Open the project in VS Code  
 
 <br>
 
