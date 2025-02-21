@@ -1,8 +1,23 @@
 import logo from './logo.svg';
 import './App.css';
-import './background.mp3';
+import backgroundAudio from './background.mp3';
+import { useEffect, useRef } from 'react';
 
 function App() {
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    const playAudio = () => {
+      if (audioRef.current) {
+        audioRef.current.play();
+      }
+    };
+    document.addEventListener('click', playAudio);
+    return () => {
+      document.removeEventListener('click', playAudio);
+    };
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -18,7 +33,7 @@ function App() {
         >
           Crunch Time Studios
         </a>
-        <audio src = "./background.mp3" autoPlay loop/>
+        <audio ref={audioRef} src={backgroundAudio} loop />
       </header>
     </div>
   );
