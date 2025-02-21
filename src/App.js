@@ -16,7 +16,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Crunch Time Studios
         </a>
         <audio src = "./background.mp3" autoPlay loop/>
       </header>
