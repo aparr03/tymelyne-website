@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>About - WellTasked</title>
+    <style>
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1em 20px;
+        }
+        #welcome-banner {
+            display: none;
+            color: white;
+        }
+        #login-label {
+            display: none;
+            color: white;
+            cursor: pointer;
+        }
+        main {
+            padding-top: 0; /* Remove padding tweak */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>WellTasked</h1>
+        <div id="welcome-banner">
+            <p id="welcome-text"></p>
+        </div>
+        <div id="login-label" onclick="window.location.href='profile_page.html'">
+            <p>Login to your profile</p>
+        </div>
+    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="profile_page.html">Profile</a>
+        <a href="goals_page.html">Goals</a>
+        <a href="calendar_page.html">Calendar</a>
+        <a href="about_page.html">About</a>
+    </nav>
+    <main>
+        <div class="about-header">
+            <h2>About Page</h2>
+            <p>Learn more about Andrew Parr and his journey</p>
+        </div>
+        <div class="paragraph-section">
+            <h3>About Andrew Parr</h3>
+            <p>Andrew Parr is a dedicated college student attending Central Michigan University, where he is pursuing his Bachelor's Degree in Computer Science with a Minor in Math and IT. As a senior, Andrew is set to graduate in May of 2025. He is passionate about technology and is eager to transition into a full-time career immediately after graduation.</p>
+        </div>
+        <div class="paragraph-section">
+            <h3>Academic Journey</h3>
+            <p>Throughout his academic journey, Andrew has consistently demonstrated a strong aptitude for problem-solving and analytical thinking. His coursework has provided him with a solid foundation in computer science principles, programming languages, and software development methodologies. Additionally, his minors in Math and IT have equipped him with a diverse skill set that complements his primary field of study.</p>
+        </div>
+        <div class="paragraph-section">
+            <h3>Future Aspirations</h3>
+            <p>Andrew's future aspirations include securing a position in the tech industry where he can apply his knowledge and skills to real-world challenges. He is particularly interested in roles that involve software development and data analysis. Andrew is committed to continuous learning and professional growth.</p>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 WellTasked  (Website made with 100% open source content)</p>
+    </footer>
+    <script>
+        function showWelcomeMessage(username) {
+            const welcomeBanner = document.getElementById('welcome-banner');
+            const welcomeText = document.getElementById('welcome-text');
+            welcomeText.textContent = `Welcome to WellTasked, ${username}`;
+            welcomeBanner.style.display = 'block';
+        }
+
+        function showLoginLabel() {
+            const loginLabel = document.getElementById('login-label');
+            loginLabel.style.display = 'block';
+        }
+
+        function checkLoginStatus() {
+            fetch('/check-login', {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.loggedIn) {
+                    showWelcomeMessage(data.username);
+                } else {
+                    showLoginLabel();
+                }
+            })
+            .catch(error => {
+                console.error('Error checking login status:', error);
+            });
+        }
+
+        window.onload = checkLoginStatus;
+    </script>
+</body>
+</html>

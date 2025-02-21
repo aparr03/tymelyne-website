@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Profile - WellTasked</title>
+    <style>
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1em 20px;
+        }
+        #welcome-banner {
+            display: none;
+            color: white;
+        }
+        #login-label {
+            display: none;
+            color: white;
+            cursor: pointer;
+        }
+        main {
+            padding-top: 0; /* Remove padding tweak */
+        }
+        #profile-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        #profile-image-input {
+            display: none; /* Hide the file input element */
+        }
+        #change-image-button, #logout-button {
+            margin-top: 10px;
+            width: 150px; /* Match the width of the profile picture */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>WellTasked</h1>
+        <div id="welcome-banner">
+            <p id="welcome-text"></p>
+        </div>
+        <div id="login-label" onclick="window.location.href='profile_page.html'">
+            <p>Login to your profile</p>
+        </div>
+    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="profile_page.html">Profile</a>
+        <a href="goals_page.html">Goals</a>
+        <a href="calendar_page.html">Calendar</a>
+        <a href="about_page.html">About</a>
+    </nav>
+    <div id="message-banner" style="display: none;">
+        <p id="message-text"></p>
+        <button onclick="document.getElementById('message-banner').style.display='none'">&times;</button>
+    </div>
+    <main>
+        <h2>Profile Page</h2>
+        <section id="profile-info" style="display: none;">
+            <img id="profile-picture" src="default_pfp.png" alt="Profile Picture">
+            <form id="change-image-form" enctype="multipart/form-data">
+                <input type="file" id="profile-image-input" name="profile-image" accept="image/*">
+                <button type="button" id="change-image-button">Change Image</button>
+                <button type="submit" style="display: none;">Submit</button> <!-- Hidden submit button -->
+            </form>
+            <textarea id="bio" placeholder="Write something about yourself..."></textarea>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <button id="save-bio-button">Save Bio</button>
+                <button id="logout-button">Logout</button>
+            </div>
+        </section>
+        <section id="login">
+            <h3>Login</h3>
+            <form id="login-form">
+                <label for="login-username">Username:</label>
+                <input type="text" id="login-username" name="username" required>
+                <label for="login-password">Password:</label>
+                <input type="password" id="login-password" name="password" required>
+                <button type="submit">Login</button>
+            </form>
+        </section>
+        <section id="register">
+            <h3>Register</h3>
+            <form id="register-form">
+                <label for="register-username">Username:</label>
+                <input type="text" id="register-username" name="username" required>
+                <label for="register-password">Password:</label>
+                <input type="password" id="register-password" name="password" required>
+                <label for="register-email">Email:</label>
+                <input type="email" id="register-email" name="email" required>
+                <button type="submit">Register</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 WellTasked</p>
+    </footer>
+    <script>
+        const ws = new WebSocket(`ws://${window.location.host}`);
+
+        ws.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            if (data.type === 'profile_image_updated' && data.username === getUsernameFromCookie()) {
+                loadProfilePicture(data.username);
+            } else if (data.type === 'database_update') {
+                // Handle database update notification
+                console.log(data.message);
+                // Optionally, refresh the data displayed on the page
+                refreshData();
+            } else if (data.type === 'bio_cleared' && data.username === getUsernameFromCookie()) {
+                document.getElementById('bio').value = '';
+            }
+        };
+
+        function getUsernameFromCookie() {
+            const name = 'username=';
+            const decodedCookie = decodeURIComponent(document.cookie);
+            const ca = decodedCookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) === 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return '';
+        }
+
+        function refreshData() {
+            // Implement this function to refresh the data displayed on the page
+            // For example, you can fetch the latest data from the server and update the DOM
+            console.log("Refreshing data...");
+            // Example: fetch('/latest-data').then(...).then(updateDOM);
+        }
+
+        document.getElementById('register-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            console.log("Submitting registration form");
+            fetch('/register', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                console.log("Received response from /register");
+                if (response.status === 409) {
+                    throw new Error('Username already exists');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Received data from /register:", data);
+                if (data.message === 'registration_success') {
+                    showMessage('Registration successful!');
+                    document.getElementById('login').style.display = 'none';
+                    document.getElementById('register').style.display = 'none';
+                    document.getElementById('profile-info').style.display = 'block';
+                    showWelcomeMessage(data.username);
+                    loadProfilePicture(data.username);
+                    event.target.reset(); // Clear the input fields
+                    console.log("Registration form reset");
+                } else {
+                    showMessage('Registration failed');
+                }
+            })
+            .catch(error => {
+                console.error('Registration error:', error);
+                showMessage('Registration failed: ' + error.message);
+            })
+            .finally(() => {
+                document.getElementById('register-username').value = '';
+                document.getElementById('register-password').value = '';
+                document.getElementById('register-email').value = '';
+            });
+        });
+
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            console.log("Submitting login form");
+            fetch('/login', {
+                method: 'POST',
+                body: new URLSearchParams(formData)
+            })
+            .then(response => {
+                console.log("Received response from /login");
+                return response.json();
+            })
+            .then(data => {
+                console.log("Received data from /login:", data);
+                if (data.message === 'login_success') {
+                    showMessage('Login successful!');
+                    document.getElementById('login').style.display = 'none';
+                    document.getElementById('register').style.display = 'none';
+                    document.getElementById('profile-info').style.display = 'block';
+                    showWelcomeMessage(data.username);
+                    loadProfilePicture(data.username);
+                    loadBio(data.username); // Ensure bio is loaded
+                    event.target.reset(); // Clear the input fields
+                    console.log("Login form reset");
+                } else {
+                    showMessage('Username or password not found');
+                }
+            })
+            .catch(error => {
+                console.error('Login error:', error);
+                showMessage('Login failed: ' + error.message);
+            })
+            .finally(() => {
+                document.getElementById('login-username').value = '';
+                document.getElementById('login-password').value = '';
+            });
+        });
+
+        document.getElementById('logout-button').addEventListener('click', function() {
+            console.log("Submitting logout request");
+            fetch('/logout', {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Received data from /logout:", data);
+                if (data.message === 'logout_success') {
+                    showMessage('Logout successful!');
+                    document.getElementById('login').style.display = 'block';
+                    document.getElementById('register').style.display = 'block';
+                    document.getElementById('profile-info').style.display = 'none';
+                    document.getElementById('welcome-banner').style.display = 'none';
+                    document.getElementById('bio').value = ''; // Clear the bio field
+                }
+            })
+            .catch(error => {
+                console.error('Logout error:', error);
+                showMessage('Logout failed: ' + error.message);
+            });
+        });
+
+        document.getElementById('change-image-button').addEventListener('click', function() {
+            document.getElementById('profile-image-input').click();
+        });
+
+        document.getElementById('profile-image-input').addEventListener('change', function() {
+            const form = document.getElementById('change-image-form');
+            const formData = new FormData(form);
+            console.log("Submitting profile image change");
+            fetch('/upload-profile-image', { // Ensure correct URL
+                method: 'POST',
+                body: formData,
+                credentials: 'include' // Ensure cookies are sent with the request
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Received data from /upload-profile-image:", data);
+                if (data.message === 'upload_success') {
+                    showMessage('Profile image updated successfully!');
+                    loadProfilePicture(data.username);
+                } else {
+                    showMessage('Profile image update failed');
+                }
+            })
+            .catch(error => {
+                console.error('Image upload error:', error);
+                showMessage('Profile image update failed: ' + error.message);
+            });
+        });
+
+        document.getElementById('change-image-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            console.log("Submitting profile image change form");
+            fetch('/upload-profile-image', { // Ensure correct URL
+                method: 'POST',
+                body: formData,
+                credentials: 'include' // Ensure cookies are sent with the request
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Received data from /upload-profile-image:", data);
+                if (data.message === 'upload_success') {
+                    showMessage('Profile image updated successfully!');
+                    loadProfilePicture(data.username);
+                } else {
+                    showMessage('Profile image update failed');
+                }
+            })
+            .catch(error => {
+                console.error('Image upload error:', error);
+                showMessage('Profile image update failed: ' + error.message);
+            });
+        });
+
+        document.getElementById('save-bio-button').addEventListener('click', function() {
+            const bio = document.getElementById('bio').value;
+            console.log("Submitting bio update:", bio); // Debugging statement
+            fetch('/update-bio', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `bio=${encodeURIComponent(bio)}`,
+                credentials: 'include' // Ensure cookies are sent with the request
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === 'Bio updated successfully') {
+                    showMessage('Bio updated successfully!');
+                } else {
+                    showMessage('Bio update failed');
+                }
+            })
+            .catch(error => {
+                console.error('Bio update error:', error);
+                showMessage('Bio update failed: ' + error.message);
+            });
+        });
+
+        function showMessage(message) {
+            const banner = document.getElementById('message-banner');
+            const messageText = document.getElementById('message-text');
+            messageText.textContent = message;
+            banner.style.display = 'block';
+        }
+
+        function showWelcomeMessage(username) {
+            const welcomeBanner = document.getElementById('welcome-banner');
+            const welcomeText = document.getElementById('welcome-text');
+            welcomeText.textContent = `Welcome to WellTasked, ${username}`;
+            welcomeBanner.style.display = 'block';
+        }
+
+        function showLoginLabel() {
+            const loginLabel = document.getElementById('login-label');
+            loginLabel.style.display = 'block';
+        }
+
+        function checkLoginStatus() {
+            console.log("Checking login status");
+            fetch('/check-login', {
+                method: 'GET',
+                credentials: 'include' // Ensure cookies are sent with the request
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Received data from /check-login:", data);
+                if (data.loggedIn) {
+                    document.getElementById('login').style.display = 'none';
+                    document.getElementById('register').style.display = 'none';
+                    document.getElementById('profile-info').style.display = 'block';
+                    showWelcomeMessage(data.username);
+                    loadProfilePicture(data.username);
+                    loadBio(data.username); // Ensure bio is loaded
+                } else {
+                    showLoginLabel();
+                }
+            })
+            .catch(error => {
+                console.error('Error checking login status:', error);
+            });
+        }
+
+        function loadProfilePicture(username) {
+            console.log("Loading profile picture for:", username);
+            fetch(`/profile-picture?username=${username}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Profile picture not found');
+                }
+                return response.blob();
+            })
+            .then(blob => {
+                const url = URL.createObjectURL(blob);
+                document.getElementById('profile-picture').src = url;
+            })
+            .catch(error => {
+                console.error('Error loading profile picture:', error);
+                document.getElementById('profile-picture').src = 'default_pfp.png';
+            });
+        }
+
+        function loadProfileData(username) {
+            fetch(`/profile-data?username=${username}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.bio) {
+                    document.getElementById('bio').value = data.bio;
+                }
+            })
+            .catch(error => {
+                console.error('Error loading profile data:', error);
+            });
+        }
+
+        function loadBio(username) {
+            console.log("Fetching bio for user:", username); // Debugging statement
+            fetch(`/profile-data?username=${username}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.bio) {
+                    document.getElementById('bio').value = data.bio;
+                    console.log("Bio loaded successfully for user:", username, data.bio); // Debugging statement
+                } else {
+                    document.getElementById('bio').value = ''; // Clear the bio if not found
+                    console.log("No bio found for user:", username); // Debugging statement
+                }
+            })
+            .catch(error => {
+                console.error('Error loading bio for user:', username, error);
+                document.getElementById('bio').value = ''; // Clear the bio on error
+            });
+        }
+
+        window.onload = checkLoginStatus;
+    </script>
+</body>
+</html> 
+

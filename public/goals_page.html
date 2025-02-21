@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Goals - WellTasked</title>
+    <style>
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1em 20px;
+        }
+        #welcome-banner {
+            display: none;
+            color: white;
+        }
+        #login-label {
+            display: none;
+            color: white;
+            cursor: pointer;
+        }
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 160px); /* Adjust height to account for header and footer */
+            text-align: center;
+        }
+        .coming-soon {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s ease-in-out;
+        }
+        .coming-soon h3 {
+            margin-top: 0;
+            color: #333;
+            font-family: 'Georgia', serif;
+        }
+        .coming-soon p {
+            color: #555;
+            line-height: 1.6;
+            font-family: 'Arial', sans-serif;
+        }
+        .coming-soon:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>WellTasked</h1>
+        <div id="welcome-banner">
+            <p id="welcome-text"></p>
+        </div>
+        <div id="login-label" onclick="window.location.href='profile_page.html'">
+            <p>Login to your profile</p>
+        </div>
+    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="profile_page.html">Profile</a>
+        <a href="goals_page.html">Goals</a>
+        <a href="calendar_page.html">Calendar</a>
+        <a href="about_page.html">About</a>
+    </nav>
+    <main>
+        <div class="coming-soon">
+            <h3>Coming Soon</h3>
+            <p>New features coming soon. Stay tuned for updates!</p>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 WellTasked</p>
+    </footer>
+    <script>
+        function showWelcomeMessage(username) {
+            const welcomeBanner = document.getElementById('welcome-banner');
+            const welcomeText = document.getElementById('welcome-text');
+            welcomeText.textContent = `Welcome to WellTasked, ${username}`;
+            welcomeBanner.style.display = 'block';
+        }
+
+        function showLoginLabel() {
+            const loginLabel = document.getElementById('login-label');
+            loginLabel.style.display = 'block';
+        }
+
+        function checkLoginStatus() {
+            fetch('/check-login', {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.loggedIn) {
+                    showWelcomeMessage(data.username);
+                } else {
+                    showLoginLabel();
+                }
+            })
+            .catch(error => {
+                console.error('Error checking login status:', error);
+            });
+        }
+
+        window.onload = checkLoginStatus;
+    </script>
+</body>
+</html>
