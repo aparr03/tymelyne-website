@@ -1,5 +1,5 @@
 # tymeline-website
-A simple cookbook website
+Senior Design II Project
 
 ## HOW TO SET UP AND EDIT CODE
 
