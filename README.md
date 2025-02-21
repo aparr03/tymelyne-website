@@ -38,6 +38,7 @@ Senior Design II Project
    - Run `npm start` in terminal (this will host the website locally from your machine using Node)  
    - Run `vercel dev` in terminal (This will use the Vercel CLI and prompt you in terminal to use y/n and arrow keys to select your project)
    - Or, while live, visit the website at https://tymeline.vercel.app/
+  
 <br>
 
 6. **Pushing Changes**  
