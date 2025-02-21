@@ -5,7 +5,8 @@ import { useEffect, useRef } from 'react';
 
 function App() {
   const audioRef = useRef(null);
-
+  
+  // Play audio on click
   useEffect(() => {
     const playAudio = () => {
       if (audioRef.current) {
@@ -18,7 +19,9 @@ function App() {
     };
   }, []);
 
+  // Web Content
   return (
+    // Div containing main content
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
