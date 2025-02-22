@@ -16,10 +16,7 @@ import SitemarkIcon from './SitemarkIcon';
 function Copyright() {
   return (
     <Typography variant="body2" sx={{ color: 'text.secondary', mt: 1 }}>
-      {'Copyright © '}
-      <Link color="text.secondary" href="https://mui.com/">
-        Sitemark
-      </Link>
+      {'Copyright © Crunch Time Studios'}
       &nbsp;
       {new Date().getFullYear()}
     </Typography>
@@ -189,7 +186,7 @@ export default function Footer() {
           <IconButton
             color="inherit"
             size="small"
-            href="https://github.com/mui"
+            href="https://github.com/marcdejesus"
             aria-label="GitHub"
             sx={{ alignSelf: 'center' }}
           >

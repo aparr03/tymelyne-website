@@ -17,8 +17,8 @@ const tiers = [
     title: 'Free',
     price: '0',
     description: [
-      '10 users included',
-      '2 GB of storage',
+      '2 goal tracks included',
+      'Limited access to features',
       'Help center access',
       'Email support',
     ],
@@ -29,27 +29,25 @@ const tiers = [
   {
     title: 'Professional',
     subheader: 'Recommended',
-    price: '15',
+    price: '10',
     description: [
-      '20 users included',
-      '10 GB of storage',
-      'Help center access',
+      'Access to unlimited goal tracks',
+      'Access to all features',
       'Priority email support',
-      'Dedicated team',
-      'Best deals',
+      'Cancel any time',
     ],
     buttonText: 'Start now',
     buttonVariant: 'contained',
     buttonColor: 'secondary',
   },
   {
-    title: 'Enterprise',
-    price: '30',
+    title: 'Professional (Yearly)',
+    price: '5',
     description: [
-      '50 users included',
-      '30 GB of storage',
-      'Help center access',
-      'Phone & email support',
+      'Access to unlimited goal tracks',
+      'Access to all features',
+      'Priority email support',
+      'Best deal',
     ],
     buttonText: 'Contact us',
     buttonVariant: 'outlined',
@@ -84,12 +82,6 @@ export default function Pricing() {
           sx={{ color: 'text.primary' }}
         >
           Pricing
-        </Typography>
-        <Typography variant="body1" sx={{ color: 'text.secondary' }}>
-          Quickly build an effective pricing table for your potential customers with
-          this layout. <br />
-          It&apos;s built with default Material UI components with little
-          customization.
         </Typography>
       </Box>
       <Grid
