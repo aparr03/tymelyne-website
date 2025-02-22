@@ -17,7 +17,7 @@ const items = [
     icon: <ViewQuiltRoundedIcon />,
     title: 'Dashboard',
     description:
-      'This item could provide a snapshot of the most important metrics or data points related to the product.',
+      'On your dashboard, you can see your progress, your tasks, and your habits. We also curate milestones for you to see your progression, and game-like features to keep you going.',
     imageLight: `url("${process.env.TEMPLATE_IMAGE_URL || 'https://mui.com'}/static/images/templates/templates-images/dash-light.png")`,
     imageDark: `url("${process.env.TEMPLATE_IMAGE_URL || 'https://mui.com'}/static/images/templates/templates-images/dash-dark.png")`,
   },
@@ -25,15 +25,15 @@ const items = [
     icon: <EdgesensorHighRoundedIcon />,
     title: 'Mobile integration',
     description:
-      'This item could provide information about the mobile app version of the product.',
+      'We have a mobile app that you can use to track your progress on the go.',
     imageLight: `url("${process.env.TEMPLATE_IMAGE_URL || 'https://mui.com'}/static/images/templates/templates-images/mobile-light.png")`,
     imageDark: `url("${process.env.TEMPLATE_IMAGE_URL || 'https://mui.com'}/static/images/templates/templates-images/mobile-dark.png")`,
   },
   {
     icon: <DevicesRoundedIcon />,
-    title: 'Available on all platforms',
+    title: 'Fun Features',
     description:
-      'This item could let users know the product is available on all platforms, such as web, mobile, and desktop.',
+      'Here are some of our game-like features that you can use to keep yourself motivated.',
     imageLight: `url("${process.env.TEMPLATE_IMAGE_URL || 'https://mui.com'}/static/images/templates/templates-images/devices-light.png")`,
     imageDark: `url("${process.env.TEMPLATE_IMAGE_URL || 'https://mui.com'}/static/images/templates/templates-images/devices-dark.png")`,
   },
@@ -158,9 +158,7 @@ export default function Features() {
           variant="body1"
           sx={{ color: 'text.secondary', mb: { xs: 2, sm: 4 } }}
         >
-          Provide a brief overview of the key features of the product. For example,
-          you could list the number of features, their types or benefits, and
-          add-ons.
+          Tyme Lyne is a tool that makes self improvement fun and easy. We offer guided tasks, habits, and routines to help you improvement anything about yourself.
         </Typography>
       </Box>
       <Box
