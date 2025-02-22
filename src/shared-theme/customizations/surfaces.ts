@@ -12,9 +12,9 @@ export const surfacesCustomizations: Components<Theme> = {
       root: ({ theme }) => ({
         padding: 4,
         overflow: 'clip',
-        backgroundColor: (theme.vars || theme).palette.background.default,
+        backgroundColor: theme.palette.background.default,
         border: '1px solid',
-        borderColor: (theme.vars || theme).palette.divider,
+        borderColor: theme.palette.divider,
         ':before': {
           backgroundColor: 'transparent',
         },
@@ -22,12 +22,12 @@ export const surfacesCustomizations: Components<Theme> = {
           borderBottom: 'none',
         },
         '&:first-of-type': {
-          borderTopLeftRadius: (theme.vars || theme).shape.borderRadius,
-          borderTopRightRadius: (theme.vars || theme).shape.borderRadius,
+          borderTopLeftRadius: theme.shape.borderRadius,
+          borderTopRightRadius: theme.shape.borderRadius,
         },
         '&:last-of-type': {
-          borderBottomLeftRadius: (theme.vars || theme).shape.borderRadius,
-          borderBottomRightRadius: (theme.vars || theme).shape.borderRadius,
+          borderBottomLeftRadius: theme.shape.borderRadius,
+          borderBottomRightRadius: theme.shape.borderRadius,
         },
       }),
     },
