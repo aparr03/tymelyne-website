@@ -53,23 +53,20 @@ export default function AppAppBar() {
           <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', px: 0 }}>
             <Sitemark />
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-              <Button variant="text" color="info" size="small">
+              <Button variant="text" color="info" size="small" href="#features">
                 Features
               </Button>
-              <Button variant="text" color="info" size="small">
+              <Button variant="text" color="info" size="small" href="#testimonials">
                 Testimonials
               </Button>
-              <Button variant="text" color="info" size="small">
+              <Button variant="text" color="info" size="small" href="#highlights">
                 Highlights
               </Button>
-              <Button variant="text" color="info" size="small">
+              <Button variant="text" color="info" size="small" href="#pricing">
                 Pricing
               </Button>
-              <Button variant="text" color="info" size="small" sx={{ minWidth: 0 }}>
+              <Button variant="text" color="info" size="small" href="#faq" sx={{ minWidth: 0 }}>
                 FAQ
-              </Button>
-              <Button variant="text" color="info" size="small" sx={{ minWidth: 0 }}>
-                Blog
               </Button>
             </Box>
           </Box>
@@ -115,12 +112,12 @@ export default function AppAppBar() {
                   </IconButton>
                 </Box>
 
-                <MenuItem>Features</MenuItem>
-                <MenuItem>Testimonials</MenuItem>
-                <MenuItem>Highlights</MenuItem>
-                <MenuItem>Pricing</MenuItem>
-                <MenuItem>FAQ</MenuItem>
-                <MenuItem>Blog</MenuItem>
+                <MenuItem component="a" href="#features">Features</MenuItem>
+                <MenuItem component="a" href="#testimonials">Testimonials</MenuItem>
+                <MenuItem component="a" href="#highlights">Highlights</MenuItem>
+                <MenuItem component="a" href="#pricing">Pricing</MenuItem>
+                <MenuItem component="a" href="#faq">FAQ</MenuItem>
+                <MenuItem component="a" href="#blog">Blog</MenuItem>
                 <Divider sx={{ my: 3 }} />
                 <MenuItem>
                   <Button color="primary" variant="contained" fullWidth>
