@@ -26,10 +26,13 @@ const Navbar = () => {
           </div>
           
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-4">
             <a href="#how-it-works" className="text-gray-700 hover:text-indigo-600 transition-colors">How It Works</a>
             <a href="#features" className="text-gray-700 hover:text-indigo-600 transition-colors">Features</a>
             <a href="#testimonials" className="text-gray-700 hover:text-indigo-600 transition-colors">Testimonials</a>
+            <button className="border-2 border-indigo-600 text-indigo-600 px-6 py-2 rounded-full hover:bg-indigo-50 transition-colors shadow-sm">
+              Sign Up
+            </button>
             <button className="bg-indigo-600 text-white px-6 py-2 rounded-full hover:bg-indigo-700 transition-colors shadow-md">
               Sign In
             </button>
@@ -84,6 +87,9 @@ const Navbar = () => {
               Testimonials
             </a>
             <div className="px-3 py-2">
+              <button className="w-full border-2 border-indigo-600 text-indigo-600 px-6 py-2 rounded-full hover:bg-indigo-50 transition-colors shadow-sm mb-2">
+                Sign Up
+              </button>
               <button className="w-full bg-indigo-600 text-white px-6 py-2 rounded-full hover:bg-indigo-700 transition-colors shadow-md">
                 Sign In
               </button>

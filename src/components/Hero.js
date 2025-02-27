@@ -25,7 +25,7 @@ const Hero = () => {
             <div className="bg-indigo-100 rounded-2xl p-3 shadow-xl">
               <div className="bg-white rounded-xl overflow-hidden shadow-sm">
                 <img 
-                  src="/api/placeholder/600/450" 
+                  src="https://placehold.co/600x450?text=Place-Holder" 
                   alt="TymeLyne App Interface" 
                   className="w-full h-auto"
                 />

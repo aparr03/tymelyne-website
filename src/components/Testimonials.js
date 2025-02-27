@@ -7,21 +7,21 @@ const Testimonials = () => {
       quote: "TymeLyne transformed how I approach my fitness goals. The AI-generated plan was perfectly tailored to my needs, and the gamification elements kept me motivated on days when I would have otherwise given up.",
       name: "Sarah Johnson",
       title: "Marathon Runner",
-      avatar: "/api/placeholder/64/64"
+      avatar: "https://ui-avatars.com/api/?name=Sarah+Johnson&size=64&background=6366F1&color=fff"
     },
     {
       id: 2,
       quote: "As someone learning to code, TymeLyne's progression system made the journey feel less overwhelming. The adaptive difficulty ensured I was always challenged but never discouraged.",
       name: "Marcus Chen",
       title: "Software Developer",
-      avatar: "/api/placeholder/64/64"
+      avatar: "https://ui-avatars.com/api/?name=Marcus+Chen&size=64&background=6366F1&color=fff"
     },
     {
       id: 3,
       quote: "The personalized insights are what make TymeLyne special. It's like having a coach who knows exactly when to push you and when to let you recover. I've achieved more in 3 months than I did all last year.",
       name: "Aisha Patel",
       title: "Small Business Owner",
-      avatar: "/api/placeholder/64/64"
+      avatar: "https://ui-avatars.com/api/?name=Aisha+Patel&size=64&background=6366F1&color=fff"
     }
   ];
 
