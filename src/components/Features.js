@@ -62,11 +62,11 @@ const Features = () => {
   ];
 
   return (
-    <section id="features" className="py-20 bg-gray-50">
+    <section id="features" className="py-20 bg-gray-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Key Features</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Key Features</h2>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Powerful tools designed to transform how you set, track, and achieve your most ambitious goals.
           </p>
         </div>
@@ -78,11 +78,11 @@ const Features = () => {
               className={`p-6 rounded-lg text-left transition-all duration-200 ${
                 activeFeature === index 
                   ? 'bg-indigo-600 text-white shadow-lg' 
-                  : 'bg-white hover:bg-gray-100 text-gray-800 border border-gray-200'
+                  : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-800 dark:text-white border border-gray-200 dark:border-gray-700'
               }`}
               onClick={() => setActiveFeature(index)}
             >
-              <div className={`${activeFeature === index ? 'text-white' : 'text-indigo-600'}`}>
+              <div className={`${activeFeature === index ? 'text-white' : 'text-indigo-600 dark:text-indigo-400'}`}>
                 {feature.icon}
               </div>
               <h3 className="text-lg font-semibold mt-4">{feature.title}</h3>
@@ -90,23 +90,23 @@ const Features = () => {
           ))}
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
           <div className="md:flex">
             <div className="md:w-1/2 p-8 md:p-12">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                 {features[activeFeature].title}
               </h3>
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
                 {features[activeFeature].description}
               </p>
-              <button className="inline-flex items-center text-indigo-600 font-medium hover:text-indigo-800">
+              <button className="inline-flex items-center text-indigo-600 dark:text-indigo-400 font-medium hover:text-indigo-800 dark:hover:text-indigo-300">
                 Learn more
                 <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </button>
             </div>
-            <div className="md:w-1/2 bg-gray-100">
+            <div className="md:w-1/2 bg-gray-100 dark:bg-gray-700">
               <img 
                 src={features[activeFeature].image} 
                 alt={features[activeFeature].title} 

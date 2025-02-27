@@ -26,24 +26,24 @@ const Testimonials = () => {
   ];
 
   return (
-    <section id="testimonials" className="py-20 bg-indigo-50">
+    <section id="testimonials" className="py-20 bg-indigo-50 dark:bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">What Our Users Say</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">What Our Users Say</h2>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Join thousands of goal-achievers who are using TymeLyne to turn their aspirations into reality.
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {testimonials.map((testimonial) => (
-            <div key={testimonial.id} className="bg-white rounded-xl shadow-md p-8 relative">
+            <div key={testimonial.id} className="bg-white dark:bg-gray-700 rounded-xl shadow-md dark:shadow-gray-900/30 p-8 relative">
               {/* Quote mark */}
               <div className="absolute -top-4 -left-4 bg-indigo-600 text-white w-10 h-10 rounded-full flex items-center justify-center text-2xl font-serif">
                 "
               </div>
               
-              <p className="text-gray-600 mb-6 italic">{testimonial.quote}</p>
+              <p className="text-gray-600 dark:text-gray-300 mb-6 italic">{testimonial.quote}</p>
               
               <div className="flex items-center">
                 <img 
@@ -52,8 +52,8 @@ const Testimonials = () => {
                   className="w-12 h-12 rounded-full mr-4"
                 />
                 <div>
-                  <h4 className="font-bold text-gray-900">{testimonial.name}</h4>
-                  <p className="text-gray-500 text-sm">{testimonial.title}</p>
+                  <h4 className="font-bold text-gray-900 dark:text-white">{testimonial.name}</h4>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm">{testimonial.title}</p>
                 </div>
               </div>
             </div>
@@ -61,7 +61,7 @@ const Testimonials = () => {
         </div>
         
         <div className="mt-12 text-center">
-          <button className="inline-flex items-center text-indigo-600 font-medium hover:text-indigo-800">
+          <button className="inline-flex items-center text-indigo-600 dark:text-indigo-400 font-medium hover:text-indigo-800 dark:hover:text-indigo-300">
             View all testimonials
             <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />

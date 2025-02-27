@@ -45,25 +45,25 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section id="how-it-works" className="py-20 bg-white">
+    <section id="how-it-works" className="py-20 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">How TymeLyne Works</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">How TymeLyne Works</h2>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Our AI-powered platform transforms your goals into actionable steps, making complex achievements simple and attainable.
           </p>
         </div>
 
         <div className="relative">
           {/* Timeline line */}
-          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-white z-0"></div>
+          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-indigo-100 dark:bg-gray-700 z-0"></div>
           
           <div className="grid md:grid-cols-2 gap-12 md:gap-16">
             {steps.map((step, index) => (
               <div key={step.id} className={`relative ${index % 2 !== 0 ? 'md:mr-8' : 'md:ml-8'}`}>
                 
                 
-                <div className={`bg-white p-6 rounded-xl shadow-md border border-gray-100 relative ${index % 2 !== 0 ? 'md:mr-4' : 'md:ml-4'}`}>
+                <div className={`bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 relative ${index % 2 !== 0 ? 'md:mr-4' : 'md:ml-4'}`}>
                   <div className="flex items-center mb-4">
                     {/* Step number */}
                     <div className="bg-indigo-600 text-white w-7 h-7 rounded-full flex items-center justify-center font-bold shadow-sm mr-3">
@@ -71,14 +71,14 @@ const HowItWorks = () => {
                     </div>
                     
                     {/* Title */}
-                    <h3 className="text-xl font-bold text-gray-900">{step.title}</h3>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white">{step.title}</h3>
                     
                     {/* Icon - now on the right */}
-                    <div className="text-indigo-600 ml-auto">
+                    <div className="text-indigo-600 dark:text-indigo-400 ml-auto">
                       {step.icon}
                     </div>
                   </div>
-                  <p className="text-gray-600">{step.description}</p>
+                  <p className="text-gray-600 dark:text-gray-300">{step.description}</p>
                 </div>
               </div>
             ))}
