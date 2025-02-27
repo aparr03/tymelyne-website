@@ -12,12 +12,18 @@ const CallToAction = () => {
             Join thousands of users who are transforming their aspirations into achievements with TymeLyne's AI-powered goal planning.
           </p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-            <button className="bg-white text-indigo-700 px-8 py-4 rounded-full text-lg font-medium hover:bg-indigo-50 transition-colors shadow-md">
+            <a 
+              href="/signup" 
+              className="bg-white text-indigo-700 px-8 py-4 rounded-full text-lg font-medium hover:bg-indigo-50 transition-colors shadow-md text-center"
+            >
               Get Started For Free
-            </button>
-            <button className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-indigo-700 transition-colors">
+            </a>
+            <a 
+              href="/demo" 
+              className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-indigo-700 transition-colors text-center"
+            >
               Schedule a Demo
-            </button>
+            </a>
           </div>
           <p className="mt-6 text-indigo-200 text-sm">
             No credit card required. 14-day free trial with full access.

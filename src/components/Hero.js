@@ -13,12 +13,18 @@ const Hero = () => {
               TymeLyne uses AI to transform your goals into actionable plans, track your progress, and keep you motivated every step of the way.
             </p>
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-              <button className="bg-indigo-600 text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-indigo-700 transition-colors shadow-md">
+              <a 
+                href="/signup"
+                className="bg-indigo-600 text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-indigo-700 transition-colors shadow-md text-center"
+              >
                 Get Started for Free
-              </button>
-              <button className="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm">
+              </a>
+              <a 
+                href="#how-it-works"
+                className="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm text-center"
+              >
                 Learn More
-              </button>
+              </a>
             </div>
           </div>
           <div className="md:w-1/2 relative">
