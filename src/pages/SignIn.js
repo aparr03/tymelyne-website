@@ -1,23 +1,47 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import supabase from '../lib/supabaseClient';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ThemeToggle from '../components/ThemeToggle';
 
 function SignIn() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add authentication logic here
+    
+    // Form validation
     if (email === '' || password === '') {
       setError('Please fill in all fields');
-    } else {
-      // Handle sign-in logic
-      console.log('Signing in with:', { email, password });
-      // Reset error if successful
-      setError('');
+      return;
+    }
+    
+    setLoading(true);
+    setError('');
+    
+    try {
+      // Sign in with Supabase Auth
+      const { data, error: signInError } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
+      
+      if (signInError) throw signInError;
+      
+      // Success - redirect to dashboard or home page
+      console.log('User signed in successfully:', data);
+      navigate('/dashboard'); // Or navigate to your desired route after login
+      
+    } catch (error) {
+      console.error('Sign in error:', error);
+      setError(error.message || 'An error occurred during sign in');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -37,6 +61,7 @@ function SignIn() {
               onChange={(e) => setEmail(e.target.value)}
               className="mt-1 block w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
               required
+              disabled={loading}
             />
           </div>
           <div className="mb-4">
@@ -48,6 +73,7 @@ function SignIn() {
               onChange={(e) => setPassword(e.target.value)}
               className="mt-1 block w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
               required
+              disabled={loading}
             />
           </div>
           <div className="flex items-center justify-between mb-6">
@@ -60,8 +86,9 @@ function SignIn() {
           <button 
             type="submit" 
             className="w-full bg-indigo-600 text-white px-6 py-3 rounded-full hover:bg-indigo-700 dark:hover:bg-indigo-500 transition-colors shadow-md"
+            disabled={loading}
           >
-            Sign In
+            {loading ? 'Signing In...' : 'Sign In'}
           </button>
           <div className="mt-4 text-center text-sm text-gray-600 dark:text-gray-400">
             Don't have an account?{' '}
