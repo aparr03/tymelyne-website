@@ -31,17 +31,17 @@ const Sidebar = ({ currentPage, isCollapsed, toggleSidebar }) => {
 
   return (
     <aside 
-      className={`fixed inset-y-0 left-0 z-50 flex flex-col bg-white shadow-lg transition-all duration-300 ease-in-out 
+      className={`fixed inset-y-0 left-0 z-50 flex flex-col bg-white dark:bg-gray-800 shadow-md dark:shadow-gray-900/30 transition-all duration-300 ease-in-out 
         ${isCollapsed ? 'w-16' : 'w-64'}`}
     >
       {/* Logo and menu toggle */}
-      <div className="flex items-center justify-between p-4 border-b">
+      <div className="flex items-center justify-between p-4 border-b dark:border-gray-700">
         {!isCollapsed && (
-          <div className="text-xl font-bold text-indigo-600">TymeLyne</div>
+          <div className="text-xl font-bold text-indigo-600 dark:text-indigo-400">TymeLyne</div>
         )}
         <button 
           onClick={toggleSidebar}
-          className="p-1 rounded-md hover:bg-gray-100 focus:outline-none"
+          className="p-1 rounded-md text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none transition-colors"
         >
           {isCollapsed ? <Menu size={24} /> : <ChevronLeft size={24} />}
         </button>
@@ -58,12 +58,12 @@ const Sidebar = ({ currentPage, isCollapsed, toggleSidebar }) => {
                   isCollapsed ? 'justify-center' : 'pl-4'
                 } ${
                   currentPage === item.id
-                    ? 'bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600'
-                    : 'text-gray-600 hover:bg-gray-100'
-                } transition-colors duration-200`}
+                    ? 'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 border-r-4 border-indigo-600 dark:border-indigo-400'
+                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-indigo-600 dark:hover:text-indigo-400'
+                } transition-colors duration-200 rounded-l-md`}
               >
                 <span className="flex-shrink-0">{item.icon}</span>
-                {!isCollapsed && <span className="ml-3">{item.label}</span>}
+                {!isCollapsed && <span className="ml-3 font-medium">{item.label}</span>}
               </button>
             </li>
           ))}
@@ -71,14 +71,14 @@ const Sidebar = ({ currentPage, isCollapsed, toggleSidebar }) => {
       </nav>
 
       {/* User Profile */}
-      <div className="p-4 border-t flex items-center">
-        <div className="h-8 w-8 rounded-full bg-indigo-200 flex items-center justify-center text-indigo-700 font-bold">
+      <div className="p-4 border-t dark:border-gray-700 flex items-center">
+        <div className="h-8 w-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 flex items-center justify-center text-indigo-700 dark:text-indigo-400 font-bold">
           U
         </div>
         {!isCollapsed && (
           <div className="ml-3">
-            <p className="font-medium text-sm">User Name</p>
-            <p className="text-xs text-gray-500">Level 12</p>
+            <p className="font-medium text-sm text-gray-800 dark:text-gray-200">User Name</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">Level 12</p>
           </div>
         )}
       </div>
