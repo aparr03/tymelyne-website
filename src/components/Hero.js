@@ -31,7 +31,7 @@ const Hero = () => {
             <div className="bg-indigo-100 dark:bg-indigo-900 rounded-2xl p-3 shadow-xl">
               <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm">
                 <img 
-                  src="https://placehold.co/600x450?text=Place-Holder" 
+                  src="/dashboard.png" 
                   alt="TymeLyne App Interface" 
                   className="w-full h-auto"
                 />
